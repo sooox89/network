@@ -1,22 +1,37 @@
 #ch10
 
-# class Cat():
-#     def __init__(self,name):
-#         self.name = name
-# furball = Cat('Grumpy')
-# print('Our latest addition: ', furball.name)
+class Person():
+    def __init__(self,name):
+        self.name = name
+class MDPerson(Person):
+    def __init__(self,name):
+        self.name = "Doctor" + name
+class JDPerson(Person):
+    def __init__(self,name):
+        self.name = name + ", Esquire"
 
-class Car():
+person = Person('Fudd')
+doctor = MDPerson('Fudd')
+lawyer = JDPerson('Fudd')
+print(person.name)
+print(doctor.name)
+print(lawyer.name)
+
+class Student():
+    def __init__(self,name,age,id):
+        self.name = name
+        self.age = age
+        self.id = id
     def exclaim(self):
-        print("I'm a Car!")
-class Yugo(Car):
+        print(f"{self.name} 학생은 {self.age}살이고 학번은 {self.id}입니다")
+
+class Bootcamp(Student):
     def exclaim(self):
-        print("I'm a Yugo! Much like a Car, but more Yugo-ish.")
-# print(issubclass(Yugo,Car))  ## true
+        print(f"부트캠프를 다니고 있는 {self.name} 학생은 {self.age}살이고 학번은 {self.id}입니다")
 
-give_me_a_car = Car()  # Car class에 give_me_a_car 객체 생성
-give_me_a_yugo = Yugo()
+yang = Student("양수경",22,12212291)
+yang.exclaim()
+yang = Bootcamp("양수경",22,12212291)
+yang.exclaim()
 
-give_me_a_car.exclaim() # 객체에서 exclaim
-give_me_a_yugo.exclaim()
 
