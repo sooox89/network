@@ -1,0 +1,29 @@
+package edu.oopfirst;
+
+class Person
+{ // 초기값 넣기 
+	private String name = null ;   //encapsulation 캡슐화 
+	private int age = 0 ;
+	
+	public void talk()   //class안의 member함수 : method
+	{
+		name = "아무개";
+		System.out.println("talk()메서드이다.");	}
+	public void breathe()   // public으로 공개해서 상호작용할 수 있게
+	{ age = 1 ;}
+	
+}
+
+public class OOPExOne0130 {
+
+	public static void main(String[] args) {
+		Person gildong = new Person(); // ()를 통해 class 이름과 똑같은 함수 생성
+		gildong.name = "길동";
+		System.out.printf("gildong.name=%s\n", gildong.name);
+		gildong.age = 23;
+		System.out.printf("gildong.age=%d\n", gildong.age);
+		gildong.talk();
+	
+	}
+
+}
