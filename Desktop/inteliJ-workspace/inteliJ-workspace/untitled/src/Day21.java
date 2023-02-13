@@ -1,16 +1,26 @@
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class Day21 {
     public static void main(String[] args) {
         try {
-            InetAddress addr = InetAddress.getByName("www.inha.ack.kr");
-            System.out.println(addr);
-            System.out.println(addr.getCanonicalHostName());
-            System.out.println(addr.getHostAddress());
-        } catch (UnknownHostException e) {
-//            throw new RuntimeException(e);
-            System.out.println("해당 URL은 존재하지 않습니다.");
+            URL url = new URL("http://www.inha.ac.kr");
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(urlConnection.getInputStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+            br.close();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            System.out.println("test");
         }
 
 
