@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -34,12 +35,13 @@ public class SimpleEchoServer {
                         return null;
                     }
                 };
-                Stream s = Stream.generate(socketIn);
-                s.map(text -> {
+                Stream
+                        .generate(socketIn)
+                        .peek(text -> {
                     System.out.println("클라이언트로부터 받은 메세지 : "+ text);
                     pw.println(text);
-                    return text;
-                }).allMatch(t -> t!= null);
+                        }).allMatch(Objects::nonNull);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
