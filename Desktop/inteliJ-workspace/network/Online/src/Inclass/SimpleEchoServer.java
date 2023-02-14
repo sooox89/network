@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -16,16 +18,19 @@ public class SimpleEchoServer implements Runnable{ // 다중 접속 에코 서�
         this.clientSocket = clientSocket ;
     }
     public static void main(String[] args) {
+        ExecutorService eService = Executors.newFixedThreadPool(2); // 2 threads limit
         System.out.println("다중 접속 에코 서버");
+
         try (ServerSocket serverSocket = new ServerSocket(20000)) {
             while (true) {
                 System.out.println("클라이언트 접속 대기중 ......");
                 clientSocket = serverSocket.accept();
                 SimpleEchoServer tes = new SimpleEchoServer(clientSocket);
-                new Thread(tes).start();
+//                new Thread(tes).start();    // while문을 통해 무한 발급되던 코드
+                eService.submit(tes);
             }
         } catch (IOException ex) {
-            // Handle exceptions
+            System.out.println("입출력 오류 발생");
         }
         System.out.println("다중 접속 에코 서버 종료");
     }
