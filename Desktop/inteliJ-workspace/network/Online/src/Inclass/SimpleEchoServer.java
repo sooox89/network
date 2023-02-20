@@ -40,17 +40,17 @@ public class SimpleEchoServer implements Runnable {
         System.out.println(Thread.currentThread() + " 스레드 접속");
         try (
                 BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
+                PrintWriter pw = new PrintWriter(clientSocket.getOutputStream(), true)
         ) {
             String inputLine;
             while ((inputLine = br.readLine()) != null) {
-                System.out.println(Thread.currentThread() +" 클라이언트가 보낸 메세지 : " + inputLine);
-                out.println(inputLine);
+                System.out.println(Thread.currentThread() +" 클라이언트가 보낸 메세지 : " + inputLine );
+                pw.println(inputLine);
+
             }
             System.out.println(Thread.currentThread() +" 클라이언트가 종료됨"); }
         catch (IOException ex)
         {
-            System.out.println("입출력 예외 발생!");
-        }
+            System.out.println("입출력 예외 발생!");}
     }
 }
